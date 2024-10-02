@@ -1,0 +1,8 @@
+{
+  "default": {
+    "type": "azure",
+    "api_version": "2024-07-01-preview",
+    "azure_deployment": "<your-deployment>",
+    "azure_endpoint": "${env:AZURE_OPENAI_ENDPOINT}"
+  }
+}
