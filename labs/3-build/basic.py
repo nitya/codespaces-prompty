@@ -1,6 +1,6 @@
 import json
 import prompty
-# to use the azure invoker make 
+# to use the azure invoker make
 # sure to install prompty like this:
 # pip install prompty[azure]
 import prompty.azure
@@ -16,32 +16,34 @@ Tracer.add("PromptyTracer", json_tracer.tracer)
 # if your prompty file uses environment variables make
 # sure they are loaded properly for correct execution
 
+
 @trace
-def run(    
-      firstName: any,
-      context: any,
-      question: any
+def run(
+    firstName: any,
+    context: any,
+    question: any
 ) -> str:
 
-  # execute the prompty file
-  result = prompty.execute(
-    "basic.prompty", 
-    inputs={
-      "firstName": firstName,
-      "context": context,
-      "question": question
-    }
-  )
+    # execute the prompty file
+    result = prompty.execute(
+        "basic.prompty",
+        inputs={
+            "firstName": firstName,
+            "context": context,
+            "question": question
+        }
+    )
 
-  return result
+    return result
+
 
 if __name__ == "__main__":
-   json_input = '''{
+    json_input = '''{
   "firstName": "Seth",
   "context": "The Alpine Explorer Tent boasts a detachable divider for privacy,  numerous mesh windows and adjustable vents for ventilation, and  a waterproof design. It even has a built-in gear loft for storing  your outdoor essentials. In short, it's a blend of privacy, comfort,  and convenience, making it your second home in the heart of nature!\\n",
   "question": "What can you tell me about your tents?"
 }'''
-   args = json.loads(json_input)
+    args = json.loads(json_input)
 
-   result = run(**args)
-   print(result)
+    result = run(**args)
+    print(result)
