@@ -38,7 +38,7 @@ theme:
   font:
     code: Roboto Mono  #Monospaced
     text: Roboto       #Regular
-  logo: img/prompty.svg
+  logo: assets/prompty.svg
   language: en
 
   palette:
