@@ -1,27 +1,18 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-    "name": "Prompty Tutorial",
-
-        "build": {
+    "name": "Prompty",
+    "build": {
         "dockerfile": "Dockerfile",
-            "context": ".."
+        "context": ".."
     },
-
-    "features": {
-        "ghcr.io/devcontainers/features/git:1": { },
-        "ghcr.io/devcontainers/features/python:1": { },
-        "ghcr.io/devcontainers/features/node:1": { }
-    },
-
+    
     "customizations": {
-        "codespaces": {
-            "openFiles": []
-        },
         "vscode": {
             "extensions": [
                 "ms-toolsai.prompty@prerelease",
                 "ms-python.python",
                 "ms-toolsai.jupyter",
-                "redhat.vscode-yaml"
             ]
         }
     }

@@ -1,17 +1,19 @@
 ---
-name: GitHub Serverless Prompt
-description: Sample Prompty Customized For GitHub
+name: ExamplePrompt
+description: A prompt that uses context to ground an incoming question
 authors:
-  - Nitya Narasimhan
+  - Seth Juarez
 model:
   api: chat
   configuration:
-    type: serverless
-    endpoint: https://models.inference.ai.azure.com
-    model: cohere-command-r
-    key: ${env:MY_GITHUB_TOKEN}
+    type: azure_openai
+    azure_endpoint: ${env:AZURE_OPENAI_ENDPOINT}
+    azure_deployment: <your-deployment>
+    api_version: 2024-07-01-preview
+  parameters:
+    max_tokens: 3000
 sample:
-  firstName: Buzz Lightyear
+  firstName: Seth
   context: >
     The Alpine Explorer Tent boasts a detachable divider for privacy, 
     numerous mesh windows and adjustable vents for ventilation, and 
@@ -29,7 +31,6 @@ markdown and even add some personal flair with appropriate emojis.
 # Customer
 You are helping {{firstName}} to find answers to their questions.
 Use their name to address them in your responses.
-Write your responses in a limerick
 
 # Context
 Use the following context to provide a more personalized response to {{firstName}}:
