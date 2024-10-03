@@ -16,66 +16,95 @@
 # https://squidfunk.github.io/mkdocs-material/setup/setting-up-a-blog/
 # ---------------------------------
 
-# Project information
+# Project information .........................................
 site_name: Prompty Workshop
 site_url: https://nitya.github.io/codespaces-prompty
 site_author: Nitya Narasimhan
 site_description: >-
   Exploring Prompty usage one code-first tutorial at a time
 
-# Repository
+# Repository ..................................................
 repo_name: nitya/codespaces-prompty
 repo_url: https://github.com/nitya/odespaces-prompty
 
-# Copyright
-copyright: Copyright &copy; 2024 - present Microsoft
+# Copyright ...................................................
+copyright: >
+  Copyright &copy; 2024 - present Nitya Narasimhan
+  <br/>🍪 | <a href="#__consent">Change cookie settings</a>
 
-# Configuration
-site_name: "Prompty Workshop"
+# Configuration ...............................................
 theme:
   name: material
-
   font:
-    code: Roboto Mono #Monospaced
-    text: Roboto #Regular
-
+    code: Roboto Mono  #Monospaced
+    text: Roboto       #Regular
   logo: img/prompty.svg
+  language: en
 
   palette:
+    # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
       toggle:
-        icon: material/link
+        icon: material/brightness-auto
         name: Switch to light mode
+    # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
-      scheme: default
+      scheme: default 
       primary: indigo
-      accent: amber
+      accent: pink
       toggle:
-        icon: material/toggle-switch
+        icon: material/brightness-7
         name: Switch to dark mode
+    # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: black
-      accent: pink
+      accent: amber
       toggle:
-        icon: material/toggle-switch-off
-        name: Switch to system preference
-  font:
-    text: Roboto
-    code: Roboto Mono
+        icon: material/brightness-4
+        name: Switch to system preference 
 
   features:
+    - navigation.instant
+    - navigation.instant.progress   # load progress indicator
+    - navigation.tracking           # tracks anchor tags in URL
+    - navigation.tabs               # tabbed on desktop, single in mobile    
+    - navigation.tabs.sticky        # tabs stick when scrolling downtheme:
+    - navigation.path               # add breadcrumbs
+    - navigation.indexes            # default index.md in folder is section page
+    - navigation.top
+    - toc.follow
+    - navigation.footer
 
-# Configure Plugins
+# Extras  ...............................................
+extra:
+  generator: false
+  consent:
+    title: Cookie consent
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+    actions:
+      - accept
+      - manage 
+  analytics:
+    provider: google
+    property: G-PS5XJJEQH6
+
+# Plugins  ...............................................
 plugins:
+  - search
 
-# Configure Extensions
+# Extensions  ...............................................
 markdown_extensions:
   - abbr
   - admonition
   - attr_list
   - toc:
       permalink: true
+      toc_depth: 2
   - pymdownx.details
   - pymdownx.superfences
   - pymdownx.tasklist:
@@ -83,4 +112,7 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
-    
+  - pymdownx.highlight:
+      auto_title: true
+      linenums: true
+  - pymdownx.snippets

@@ -1,15 +1,15 @@
 {
     "name": "Prompty Tutorial",
 
-    "build": {
+        "build": {
         "dockerfile": "Dockerfile",
-        "context": ".."
+            "context": ".."
     },
 
     "features": {
-        "ghcr.io/devcontainers/features/git:1": {},
-		"ghcr.io/devcontainers/features/python:1": {},
-		"ghcr.io/devcontainers/features/node:1": {}
+        "ghcr.io/devcontainers/features/git:1": { },
+        "ghcr.io/devcontainers/features/python:1": { },
+        "ghcr.io/devcontainers/features/node:1": { }
     },
 
     "customizations": {
@@ -18,9 +18,10 @@
         },
         "vscode": {
             "extensions": [
-                "ms-toolsai.jupyter",
+                "ms-toolsai.prompty@prerelease",
                 "ms-python.python",
-                "ms-toolsai.prompty@prerelease"
+                "ms-toolsai.jupyter",
+                "redhat.vscode-yaml"
             ]
         }
     }

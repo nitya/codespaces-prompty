@@ -7,8 +7,9 @@ mkdocs-material
 mkdocs-rss-plugin
 
 # Prompty
-prompty[azure]
-prompty[tracer]
+prompty
+prompty[serverless]==0.1.24
+prompty[azure]==0.1.24
 
 # Frameworks 
 promptflow[core]

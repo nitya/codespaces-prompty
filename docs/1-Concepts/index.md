@@ -1,4 +1,4 @@
-# 1. Learn Concepts
+# 1. Concepts
 
 1. Validate Prompty Setup
 1. Explore Prompty Extension

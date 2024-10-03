@@ -1,4 +1,4 @@
-# 2. My First Prompty
+# 2. Quickstart
 
 1. Create Prompty Asset 
 1. Explore Prompty Asset
