@@ -1,0 +1,2086 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Exploring Prompty usage one code-first tutorial at a time">
+      
+      
+        <meta name="author" content="Nitya Narasimhan">
+      
+      
+        <link rel="canonical" href="https://nitya.github.io/codespaces-prompty/1-Concepts/1-Specification/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../2-Tooling/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>Prompty Specification - Prompty Workshop</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-PS5XJJEQH6"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-PS5XJJEQH6",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-PS5XJJEQH6",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prompty-specification" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Prompty Workshop" class="md-header__button md-logo" aria-label="Prompty Workshop" data-md-component="logo">
+      
+  <img src="../../assets/prompty.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Prompty Workshop
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Prompty Specification
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="amber"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nitya/odespaces-prompty" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nitya/codespaces-prompty
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Prompty Workshop
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+    
+  
+  1 Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../2-Quickstart/" class="md-tabs__link">
+          
+  
+    
+  
+  2 Quickstart
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../3-Build/" class="md-tabs__link">
+          
+  
+    
+  
+  3 Build
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../4-Evaluate/" class="md-tabs__link">
+          
+  
+    
+  
+  4 Evaluate
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../5-Trace/" class="md-tabs__link">
+          
+  
+    
+  
+  5 Trace
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../6-Orchestrate/" class="md-tabs__link">
+          
+  
+    
+  
+  6 Orchestrate
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../7-Extend/" class="md-tabs__link">
+          
+  
+    
+  
+  7 Extend
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Prompty Workshop" class="md-nav__button md-logo" aria-label="Prompty Workshop" data-md-component="logo">
+      
+  <img src="../../assets/prompty.svg" alt="logo">
+
+    </a>
+    Prompty Workshop
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nitya/odespaces-prompty" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nitya/codespaces-prompty
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Prompty Workshop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    1 Concepts
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            1 Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Prompty Specification
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Prompty Specification
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-specification-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Specification: Schema
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Specification: Schema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-specification-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Specification: Properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-specification-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Specification: Definitions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-asset-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Asset: Example
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Asset: Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-asset-frontmatter" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Asset: Frontmatter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-asset-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Asset: Template
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-Tooling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Prompty Tooling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-Runtime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Prompty Runtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../2-Quickstart/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    2 Quickstart
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            2 Quickstart
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../3-Build/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    3 Build
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            3 Build
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../4-Evaluate/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    4 Evaluate
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            4 Evaluate
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../5-Trace/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    5 Trace
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            5 Trace
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../6-Orchestrate/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    6 Orchestrate
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            6 Orchestrate
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../7-Extend/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    7 Extend
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            7 Extend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-specification-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Specification: Schema
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Specification: Schema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-specification-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Specification: Properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-specification-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Specification: Definitions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-asset-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Asset: Example
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Asset: Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-asset-frontmatter" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Asset: Frontmatter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-asset-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Asset: Template
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="prompty-specification">Prompty Specification<a class="headerlink" href="#prompty-specification" title="Permanent link">&para;</a></h1>
+<p>Prompty assets are represented by files with a <code>.prompty</code> extension and must follow the schema outlined in the <a href="https://github.com/microsoft/prompty/blob/main/Prompty.yaml">Prompty Specification</a>. </p>
+<hr />
+<h2 id="1-specification-schema">1. Specification: Schema<a class="headerlink" href="#1-specification-schema" title="Permanent link">&para;</a></h2>
+<p>We can now revisit the <a href="https://github.com/microsoft/prompty/blob/main/Prompty.yaml">Prompty Specification</a> to get the full picture of the Prompty asset schema. Let's start by recongizing the top-level sections:</p>
+<ul>
+<li><code>$schema</code> - the schema version used for validation</li>
+<li><code>$id</code> - the unique identifier for the schema</li>
+<li><code>title</code> - the title of the schema</li>
+<li><code>description</code> - a brief description of the schema</li>
+<li><code>type</code> - the type of the schema (here, "object")</li>
+<li><code>additionalProperties</code> - whether additional properties are allowed (here, "false")</li>
+<li><code>properties</code> - the properties of the schema</li>
+<li><code>definitions</code> - the definitions used in the schema</li>
+</ul>
+<details class="info">
+<summary>Specificaton file: <code>prompty.yaml</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="c1"># This schema represents the specification file for the prompty</span>
+<span class="c1"># _frontmatter_, not the content section.</span>
+
+<span class="nt">$schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://json-schema.org/draft-07/schema#</span><span class="w">  </span>
+<span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://azureml/sdk-2-0/Prompty.yaml</span><span class="w">  </span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prompty front matter schema specification</span><span class="w">  </span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A specification that describes how to provision a new prompty using definition frontmatter.</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span><span class="w"> </span>
+
+<span class="nt">additionalProperties</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+
+<span class="nt">properties</span><span class="p">:</span>
+<span class="nt">$schema</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="c1"># metadata section</span>
+<span class="nt">model</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">    </span><span class="nt">additionalProperties</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">api</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">enum</span><span class="p">:</span><span class="w"> </span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chat</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">completion</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The API to use for the prompty -- this has implications on how the template is processed and how the model is called.</span>
+<span class="w">        </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chat</span>
+
+<span class="w">    </span><span class="nt">configuration</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">oneOf</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$ref</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#/definitions/azureOpenaiModel&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$ref</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#/definitions/openaiModel&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$ref</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#/definitions/maasModel&quot;</span>
+
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">$ref</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#/definitions/parameters&quot;</span>
+
+<span class="w">    </span><span class="nt">response</span><span class="p">:</span><span class="w"> </span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This determines whether the full (raw) response or just the first response in the choice array is returned.</span>
+<span class="w">        </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">first</span><span class="w"> </span>
+<span class="w">        </span><span class="nt">enum</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">first</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">full</span>
+
+
+<span class="nt">name</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of the prompty</span>
+<span class="nt">description</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Description of the prompty</span>
+<span class="nt">version</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Version of the prompty</span>
+<span class="nt">authors</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">array</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Authors of the prompty</span>
+<span class="w">    </span><span class="nt">items</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="nt">tags</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">array</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tags of the prompty</span>
+<span class="w">    </span><span class="nt">items</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+
+<span class="c1"># not yet supported -- might add later</span>
+<span class="c1"># base:</span>
+<span class="c1">#   type: string</span>
+<span class="c1">#   description: The base prompty to use as a starting point</span>
+
+<span class="nt">sample</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">oneOf</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The sample to be used in the prompty test execution</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">additionalProperties</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The file to be loaded to be used in the prompty test execution</span>
+
+<span class="c1"># the user can provide a single sample in a file or specify the data inline</span>
+<span class="c1"># sample:</span>
+<span class="c1">#   messages: </span>
+<span class="c1">#     - role: user</span>
+<span class="c1">#       content: where is the nearest coffee shop?</span>
+<span class="c1">#     - role: system</span>
+<span class="c1">#       content: I&#39;m sorry, I don&#39;t know that. Would you like me to look it up for you?</span>
+<span class="c1"># or point to a file</span>
+<span class="c1"># sample: sample.json</span>
+<span class="c1"># also the user can specify the data on the command line</span>
+<span class="c1"># pf flow test --flow p.prompty --input my_sample.json</span>
+<span class="c1"># if the user runs this command, the sample from the prompty will be used</span>
+<span class="c1"># pf flow test --flow p.prompty   </span>
+
+<span class="nt">inputs</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The inputs to the prompty</span>
+
+<span class="nt">outputs</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The outputs of the prompty</span>
+
+<span class="c1"># currently not supported -- might not be needed</span>
+<span class="c1"># init_signature:</span>
+<span class="c1">#   type: object</span>
+<span class="c1">#   description: The signature of the init function</span>
+
+<span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The template engine to be used can be specified here. This is optional.</span>
+<span class="w">    </span><span class="nt">enum</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">jinja2</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jinja2</span>
+
+<span class="nt">definitions</span><span class="p">:</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>Here, </p>
+<ul>
+<li><strong>properties</strong> describe valid "keys" that can be present in a <code>.prompty</code> asset file,</li>
+<li><strong>definitions</strong> describe "reusable" schema definitions" for quick reference in properties</li>
+</ul>
+<p>Let's take a look at Prompty schema properties and definitions in more detail.</p>
+<hr />
+<h3 id="11-specification-properties">1.1 Specification: Properties<a class="headerlink" href="#11-specification-properties" title="Permanent link">&para;</a></h3>
+<p>The <em>properties</em> schema describes these valid "keys" that can be present in a <code>.prompty</code> asset file:</p>
+<ul>
+<li><code>$schema</code> - (string) the schema version used for validation</li>
+<li><code>model</code> - (object) the model configuration for the asset<ul>
+<li><code>api</code> - (string) the API type (<code>chat</code> (default) or <code>completion</code>)</li>
+<li><code>configuration</code> - (object) one of <em>definitions</em> provided</li>
+<li><code>parameters</code> - (object) from <em>definitions</em> provided</li>
+<li><code>response</code> - (string) whether to return <code>full</code> or <code>first</code> response (default: first)</li>
+</ul>
+</li>
+<li><code>name</code> - (string) the name of the asset</li>
+<li><code>description</code> - (string) a brief description of the asset</li>
+<li><code>version</code> - (string) the version of the asset</li>
+<li><code>authors</code> - (array) a list of authors who contributed to the asset</li>
+<li><code>tags</code> - (array) a list of tags for the asset</li>
+<li><code>sample</code> - test data for validation - can be object (inline) or string (filename)</li>
+<li><code>inputs</code> - (object) defining request properties for prompty asset</li>
+<li><code>outputs</code> - (object) defining response properties for prompty asset</li>
+<li><code>template</code> - (string) the template engine to be used (default: <code>jinja2</code>)</li>
+</ul>
+<hr />
+<h3 id="12-specification-definitions">1.2 Specification: Definitions<a class="headerlink" href="#12-specification-definitions" title="Permanent link">&para;</a></h3>
+<p>The <code>definitions</code> section of the schema describes reusable schema sections that can then be referenced within the <code>properties</code> section with the <code>$ref</code> keyword. For example, this is in <code>model</code> properties:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nt">configuration</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">oneOf</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$ref</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#/definitions/azureOpenaiModel&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$ref</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#/definitions/openaiModel&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$ref</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#/definitions/maasModel&quot;</span>
+
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">$ref</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#/definitions/parameters&quot;</span>
+</code></pre></div></td></tr></table></div>
+<p>This lets us define complex schema once and reference it in multiple places without duplication of content - helping keep the specification readable and maintainable.</p>
+<p>The specification has 3 definitions for <strong>Model: Configuration</strong>:</p>
+<details class="example">
+<summary>Definition: <code>openaiModel</code> configuration for Model</summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># vanilla openai models</span>
+<span class="nt">openaiModel</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Model used to generate text</span>
+<span class="w">    </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Type of the model</span>
+<span class="w">        </span><span class="nt">const</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openai</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of the model</span>
+<span class="w">    </span><span class="nt">organization</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of the organization</span>
+<span class="w">    </span><span class="nt">additionalProperties</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<details class="example">
+<summary>Definition: <code>azurOpenaiModel</code> configuration for Model</summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># azure openai models</span>
+<span class="nt">azureOpenaiModel</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Model used to generate text</span>
+<span class="w">    </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Type of the model</span>
+<span class="w">        </span><span class="nt">const</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure_openai</span>
+<span class="w">    </span><span class="nt">api_version</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Version of the model</span>
+<span class="w">    </span><span class="nt">azure_deployment</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment of the model</span>
+<span class="w">    </span><span class="nt">azure_endpoint</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Endpoint of the model</span>
+<span class="w">    </span><span class="nt">additionalProperties</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<details class="example">
+<summary>Definition: <code>maasModel</code> configuration for Model</summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># for maas models</span>
+<span class="nt">maasModel</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Model used to generate text</span>
+<span class="w">    </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Type of the model</span>
+<span class="w">        </span><span class="nt">const</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure_serverless</span>
+<span class="w">    </span><span class="nt">azure_endpoint</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Endpoint of the model</span>
+<span class="w">    </span><span class="nt">additionalProperties</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>The specification has 1 definition for <strong>Model: Parameters</strong>. For now, it defines these as <em>common</em> to all models (where individual models may process each differently). </p>
+<p>The paramters are: <em>response_format, seed, max_tokens, temperature, tools_choice, tools, frequency_penalty, presence_penalty, stop, and top_p</em>. Click to expand for details.</p>
+<details class="example">
+<summary>Definition: <code>parameters</code> for Model</summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># parameters for the model -- for now these are not per model but the same for all models</span>
+<span class="nt">parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameters to be sent to the model</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">additionalProperties</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">response_format</span><span class="p">:</span><span class="w"> </span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">An object specifying the format that the model must output. Compatible with</span>
+<span class="w">        </span><span class="err">`</span><span class="l l-Scalar l-Scalar-Plain">gpt-4-1106-preview` and `gpt-3.5-turbo-1106`.</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">Setting to `{ &quot;type&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;json_object&quot;</span><span class="w"> </span><span class="err">}`</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enables JSON mode, which guarantees the</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">message the model generates is valid JSON.</span>
+
+<span class="w">    </span><span class="nt">seed</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span><span class="w"> </span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">This feature is in Beta. If specified, our system will make a best effort to</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">sample deterministically, such that repeated requests with the same `seed` and</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">parameters should return the same result. Determinism is not guaranteed, and you</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">should refer to the `system_fingerprint` response parameter to monitor changes</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">in the backend.</span>
+
+<span class="w">    </span><span class="nt">max_tokens</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The maximum number of [tokens](/tokenizer) that can be generated in the chat completion.</span>
+
+<span class="w">    </span><span class="nt">temperature</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">What sampling temperature to use, 0 means deterministic.</span>
+
+<span class="w">    </span><span class="nt">tools_choice</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">oneOf</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span><span class="w"> </span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">Controls which (if any) function is called by the model. `none` means the model</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">will not call a function and instead generates a message. `auto` means the model</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">can pick between generating a message or calling a function. Specifying a</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">particular function via</span>
+<span class="w">        </span><span class="err">`</span><span class="p p-Indicator">{</span><span class="s">&quot;type&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;function&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;function&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="s">&quot;name&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;my_function&quot;</span><span class="p p-Indicator">}}</span><span class="err">`</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forces the model to</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">call that function.</span>
+
+<span class="w">        </span><span class="err">`</span><span class="l l-Scalar l-Scalar-Plain">none` is the default when no functions are present. `auto` is the default if</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">functions are present.</span>
+
+<span class="w">    </span><span class="nt">tools</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">array</span>
+<span class="w">        </span><span class="nt">items</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+
+<span class="w">    </span><span class="nt">frequency_penalty</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">What sampling frequency penalty to use. 0 means no penalty.</span>
+
+<span class="w">    </span><span class="nt">presence_penalty</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">What sampling presence penalty to use. 0 means no penalty.</span>
+
+<span class="w">    </span><span class="nt">stop</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">array</span>
+<span class="w">        </span><span class="nt">items</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span><span class="w"> </span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">One or more sequences where the model should stop generating tokens. The model</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">will stop generating tokens if it generates one of the sequences. If the model</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">generates a sequence that is a prefix of one of the sequences, it will continue</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">generating tokens.</span>
+
+<span class="w">    </span><span class="nt">top_p</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span><span class="w"> </span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">What nucleus sampling probability to use. 1 means no nucleus sampling. 0 means</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">no tokens are generated.</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<hr />
+<h2 id="2-asset-example">2. Asset: Example<a class="headerlink" href="#2-asset-example" title="Permanent link">&para;</a></h2>
+<p>To get a practical sense for specification usage, let's look at an example Prompty asset file. Use the Prompty Visual Studio Code extension to generate the default <code>.prompty</code> starter file as follows:</p>
+<ul>
+<li>open the file-explorer window (left) in Visual Studio Code</li>
+<li>right-click on the folder where you want to create the <code>.prompty</code> file</li>
+<li>select <code>New Prompty File</code> from the context menu</li>
+</ul>
+<p>You should see something like this - we'll demysystify the contents, next.</p>
+<details class="info">
+<summary>Asset file: <code>basic.prompty</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Markdown</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code>---
+name: ExamplePrompt
+description: A prompt that uses context to ground an incoming question
+authors:
+<span class="k">-</span><span class="w"> </span>Seth Juarez
+model:
+    api: chat
+    configuration:
+        type: azure_openai
+        azure_endpoint: ${env:AZURE_OPENAI_ENDPOINT}
+        azure_deployment: &lt;your-deployment&gt;
+        api_version: 2024-07-01-preview
+    parameters:
+        max_tokens: 3000
+sample:
+    firstName: Seth
+    context: &gt;
+        The Alpine Explorer Tent boasts a detachable divider for privacy, 
+        numerous mesh windows and adjustable vents for ventilation, and 
+        a waterproof design. It even has a built-in gear loft for storing 
+        your outdoor essentials. In short, it&#39;s a blend of privacy, comfort, 
+        and convenience, making it your second home in the heart of nature!
+<span class="gu">    question: What can you tell me about your tents?</span>
+<span class="gu">---</span>
+
+system:
+You are an AI assistant who helps people find information. As the assistant, 
+you answer questions briefly, succinctly, and in a personable manner using 
+markdown and even add some personal flair with appropriate emojis.
+
+<span class="gh"># Customer</span>
+You are helping {{firstName}} to find answers to their questions.
+Use their name to address them in your responses.
+
+<span class="gh"># Context</span>
+Use the following context to provide a more personalized response to {{firstName}}:
+{{context}}
+
+user:
+{{question}}
+</code></pre></div></td></tr></table></div>
+</details>
+<hr />
+<h3 id="21-asset-frontmatter">2.1 Asset: Frontmatter<a class="headerlink" href="#21-asset-frontmatter" title="Permanent link">&para;</a></h3>
+<p>The <em>frontmatter</em> section of the asset occurs between the <code>---</code> delimiters (lines 1-24 above) and <strong>contains metadata about the asset</strong>. Let's take a look at just this segment below.</p>
+<p>We see the following properties used in the frontmatter:</p>
+<ul>
+<li><code>name</code> - default name is "ExamplePrompt" (change it)</li>
+<li><code>description</code> - default description given (change it)</li>
+<li><code>authors</code> - default author given (change it)</li>
+<li><code>model</code> - the <strong>model configuration</strong> for the asset<ul>
+<li><code>api</code> - set to default ("chat")</li>
+<li><code>configuration</code> - set to default ("azure_openai")</li>
+<li><code>parameters</code> - sets <code>max_tokens</code> to 3000</li>
+</ul>
+</li>
+<li><code>sample</code> - set to inline object (not filename) with 3 properties<ul>
+<li><code>firstName</code> - default requestor name (change it)</li>
+<li><code>context</code> - gives example "grounding" data (change it)</li>
+<li><code>question</code> - default user question (change it)</li>
+</ul>
+</li>
+</ul>
+<p>The <em>frontmatter</em> is used by Prompty tooling and runtime to understand the asset and its requirements for execution. The <em>sample</em> is key to allowing us to iteratively build the "shape" of our data with local testing, before integrating with external services to fetch real data that matches this shape.</p>
+<details class="example">
+<summary>Asset Frontmatter: <code>basic.prompty</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Markdown</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code>---
+name: ExamplePrompt
+description: A prompt that uses context to ground an incoming question
+authors:
+<span class="k">-</span><span class="w"> </span>Seth Juarez
+model:
+    api: chat
+    configuration:
+        type: azure_openai
+        azure_endpoint: ${env:AZURE_OPENAI_ENDPOINT}
+        azure_deployment: &lt;your-deployment&gt;
+        api_version: 2024-07-01-preview
+    parameters:
+        max_tokens: 3000
+sample:
+    firstName: Seth
+    context: &gt;
+        The Alpine Explorer Tent boasts a detachable divider for privacy, 
+        numerous mesh windows and adjustable vents for ventilation, and 
+        a waterproof design. It even has a built-in gear loft for storing 
+        your outdoor essentials. In short, it&#39;s a blend of privacy, comfort, 
+        and convenience, making it your second home in the heart of nature!
+<span class="gu">    question: What can you tell me about your tents?</span>
+<span class="gu">---</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<hr />
+<h3 id="22-asset-template">2.2 Asset: Template<a class="headerlink" href="#22-asset-template" title="Permanent link">&para;</a></h3>
+<p>The <em>template</em> section of the asset occurs below the second <code>---</code> delimiters (lines 24-end in example above) and <strong>provides the content for the prompt template</strong>. Let's take a look at just this segment below.</p>
+<p>A prompt template typically defines the <em>persona</em>, <em>instructions</em> and <em>primary content</em> (e.g., cues, examples) for the <em>inference task</em> that we want the model to execute. We see the following properties used in the template section for this purpose:</p>
+<ul>
+<li><code>system</code> - establishes default persona (AI assistant to help ..) and instructions (answer briefly ...)<ul>
+<li><code>Customer</code> -  data shape for "Customer" with instructions ("address them by name")</li>
+<li><code>Context</code> - data shape for "Grounding Context" with instructions ("personalize response")</li>
+</ul>
+</li>
+<li><code>user</code> - defines the user prompt (actual incoming request)</li>
+</ul>
+<p>The <code>{{&lt;variable-name&gt;}}</code> syntax used in the template denotes <em>placeholders</em> for data that will be bound in, when the template is <em>instantiated</em> at runtime. Note how each of those variables typically has a value defined in the <strong>sample</strong> object, for testing purposes. This allows us to get a sense for the <em>shape of data</em> we expect to retrieve and augment (from third-party services or from flow orchestration) as we iterate and engineer the prompt.</p>
+<details class="example">
+<summary>Asset Template: <code>basic.prompty</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Markdown</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code>system:
+You are an AI assistant who helps people find information. As the assistant, 
+you answer questions briefly, succinctly, and in a personable manner using 
+markdown and even add some personal flair with appropriate emojis.
+
+<span class="gh"># Customer</span>
+You are helping {{firstName}} to find answers to their questions.
+Use their name to address them in your responses.
+
+<span class="gh"># Context</span>
+Use the following context to provide a more personalized response to {{firstName}}:
+{{context}}
+
+user:
+{{question}}
+</code></pre></div></td></tr></table></div>
+</details>
+<hr />
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Overview
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../2-Tooling/" class="md-footer__link md-footer__link--next" aria-label="Next: Prompty Tooling">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Prompty Tooling
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 - present Nitya Narasimhan <br/>🍪 | <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+  
+    
+  
+
+
+  
+    
+  
+
+
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+      
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="analytics" checked>
+          <span class="task-list-indicator"></span>
+          Google Analytics
+        </label>
+      </li>
+    
+      
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="github" checked>
+          <span class="task-list-indicator"></span>
+          GitHub
+        </label>
+      </li>
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "toc.follow", "navigation.footer"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+    
+  </body>
+</html>
