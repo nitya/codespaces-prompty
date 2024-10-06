@@ -337,13 +337,13 @@ The paramters are: *response_format, seed, max_tokens, temperature, tools_choice
 
 ## 2. Asset: Example
 
-Use the Prompty Visual Studio Code extension to generate the default `.prompty` starter file as follows:
+To get a practical sense for specification usage, let's look at an example Prompty asset file. Use the Prompty Visual Studio Code extension to generate the default `.prompty` starter file as follows:
 
 - open the file-explorer window (left) in Visual Studio Code
 - right-click on the folder where you want to create the `.prompty` file
 - select `New Prompty File` from the context menu
 
-You should see something like the example below. Let's deconstruct this in the next few sections to get a sense of the Prompty specification by example.
+You should see something like this - we'll demysystify the contents, next.
 
 
 ??? info "Asset file: `basic.prompty`"
@@ -410,7 +410,7 @@ We see the following properties used in the frontmatter:
     - `context` - gives example "grounding" data (change it)
     - `question` - default user question (change it)
 
-The _frontmatter_ is used by Prompty tooling and runtime to understand the asset and its requirements for execution. Later, we'll review the Prompty specification to understand this and other frontmatter properties in more detail.
+The _frontmatter_ is used by Prompty tooling and runtime to understand the asset and its requirements for execution. The _sample_ is key to allowing us to iteratively build the "shape" of our data with local testing, before integrating with external services to fetch real data that matches this shape.
 
 ??? example "Asset Frontmatter: `basic.prompty`"
 
