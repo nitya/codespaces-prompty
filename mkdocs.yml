@@ -76,6 +76,10 @@ theme:
     - toc.follow
     - navigation.footer
 
+# Navigation  ...............................................
+nav:
+#  - index.md
+
 # Extras  ...............................................
 extra:
   generator: false
